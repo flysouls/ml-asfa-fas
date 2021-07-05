@@ -1,0 +1,56 @@
+org: '1256271340'
+app: ml-asfa-fas
+stage: dev
+component: nuxtjs
+name: nuxtjs-vHscmqmbP
+inputs:
+  src:
+    hook: npm run build
+    dist: ./
+    exclude:
+      - .env
+      - node_modules/**
+    src: ./
+  region: ap-guangzhou
+  runtime: Nodejs10.15
+  apigatewayConf:
+    protocols:
+      - http
+      - https
+    environment: release
+    serviceTimeout: 60
+    customDomains:
+      - domain: home.flysoul.cool
+        certificateId: nzt1RhQH
+        isDefaultMapping: false
+        pathMappingSet:
+          - path: /
+            environment: release
+        protocols:
+          - http
+          - https
+    autoCreateDns: true
+  staticConf:
+    cosConf:
+      replace: true
+      bucket: ml-asfa-fas-dev-1256271340
+      acl:
+        permissions: public-read
+      sources:
+        - src: .nuxt/dist/client
+          targetDir: /
+        - src: static
+          targetDir: /
+    cdnConf:
+      domain: home.flysoul.cool
+      https:
+        certId: nzt1RhQH
+      autoCreateDns: true
+  isAutoCiDeploy: false
+  functionConf:
+    eip: true
+    timeout: 3
+    memorySize: 128
+  layers:
+    - name: '${output:${stage}:${app}:ml-asfa-fas-layer.name}'
+      version: '${output:${stage}:${app}:ml-asfa-fas-layer.version}'

@@ -1,0 +1,13 @@
+org: '1256271340'
+app: ml-asfa-fas
+stage: dev
+component: layer
+name: ml-asfa-fas-layer
+inputs:
+  name: ml-asfa-fas-layer
+  region: ap-guangzhou
+  src:
+    src: ../node_modules
+    targetDir: /node_modules
+  runtimes:
+    - Nodejs10.15
